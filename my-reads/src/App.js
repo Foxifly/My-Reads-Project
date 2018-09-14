@@ -2,6 +2,7 @@ import React from 'react'
 // import * as BooksAPI from './BooksAPI'
 import './App.css'
 import MenuBar from './components/MenuBar';
+import BookShelf from './components/BookShelf'
 
 class BooksApp extends React.Component {
   state = {
@@ -18,8 +19,9 @@ class BooksApp extends React.Component {
     return (
       <div className="app">
       <MenuBar/>
-
-        Hello World I am tezting stuff
+      <BookShelf bookStatus="Currently Reading"/>
+      <BookShelf bookStatus="Want to Read"/>
+      <BookShelf bookStatus="Finished Reading"/>
         </div>
     )
   }
