@@ -3,6 +3,9 @@ import * as BooksAPI from './BooksAPI'
 import './App.css';
 import MenuBar from './components/MenuBar';
 import BookShelf from './components/BookShelf';
+import { Route } from "react-router-dom";
+import { Link } from 'react-router-dom';
+import SearchBar from './components/SearchBar';
 
 class BooksApp extends React.Component {
   state = {
@@ -26,19 +29,45 @@ componentDidMount()  {
 
   render() {
     return (
-      <div className="app">
-      <MenuBar/>
 
-      <BookShelf bookStatus="Currently Reading" booksList={this.state.allBooks.filter(book => {
-       return book.shelf === "currentlyReading"})}/>
+<div>
+      <Route
+        exact path="/"
+        render={() => {
+        return(
+          <div className="app">
+          <MenuBar/>
 
-      <BookShelf bookStatus="Want to Read" booksList={this.state.allBooks.filter(book => {
-       return book.shelf === "wantToRead"})}/>
+          <BookShelf bookStatus="Currently Reading" booksList={this.state.allBooks.filter(book => {
+           return book.shelf === "currentlyReading"})}/>
 
-      <BookShelf bookStatus="Read" booksList={this.state.allBooks.filter(book => {
-       return book.shelf === "read"})}/>
+          <BookShelf bookStatus="Want to Read" booksList={this.state.allBooks.filter(book => {
+           return book.shelf === "wantToRead"})}/>
 
-        </div>
+          <BookShelf bookStatus="Read" booksList={this.state.allBooks.filter(book => {
+           return book.shelf === "read"})}/>
+           <div className="open-search">
+             <Link to="/search">Add a book</Link>
+             </div>
+           </div>
+
+
+        )
+        }}
+       />
+
+      <Route
+        path="/search"
+        render={()=> {
+          return(
+            <div className="app">
+            <SearchBar/>
+            </div>
+          )
+        }}
+      />
+
+</div>
     )
   }
 }

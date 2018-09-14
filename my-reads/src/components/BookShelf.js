@@ -1,6 +1,6 @@
 import React, { Component } from "react";
-import escapeRegExp from "escape-string-regexp";
-import sortBy from "sort-by";
+/*import escapeRegExp from "escape-string-regexp";
+import sortBy from "sort-by";*/
 import Book from "./Book";
 
 class BookShelf extends Component {
