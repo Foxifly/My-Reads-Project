@@ -5,13 +5,12 @@ import Book from "./Book";
 
 class Search extends Component {
   state = {
-    query: "",
     results: []
   };
 
   handleChange = query => {
     if (query) {
-      query = query.trim()
+      query = query.trim();
       BooksAPI.search(query).then(results => {
         if (results) {
           if (results.error === "empty query") {
@@ -23,6 +22,7 @@ class Search extends Component {
       });
     }
   };
+
   render() {
     const { results } = this.state;
     return (
@@ -57,6 +57,7 @@ class Search extends Component {
                     />
                   );
                 }
+                return true;
               })}
           </ol>
         </div>
