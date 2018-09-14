@@ -5,7 +5,7 @@ import Book from "./Book";
 
 class BookShelf extends Component {
   render() {
-    const { bookStatus, booksList } = this.props;
+    const { updateShelf, bookStatus, booksList } = this.props;
     return (
       <div className="bookshelf">
         <h2 className="bookshelf-title">{bookStatus}</h2>
@@ -15,10 +15,8 @@ class BookShelf extends Component {
               return (
                 <Book
                   key={book.id}
-                  id={book.id}
-                  title={book.title}
-                  author={book.authors}
-                  image={book.imageLinks.thumbnail}
+                  bookObject={book}
+                  updateShelf={updateShelf}
                 />
               );
             })}

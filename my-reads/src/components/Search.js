@@ -25,6 +25,7 @@ class Search extends Component {
 
   render() {
     const { results } = this.state;
+    const { updateShelf } = this.props;
     return (
       <div className="search-books">
         <div className="search-books-bar">
@@ -47,13 +48,12 @@ class Search extends Component {
             {results !== "No Results Found" &&
               results.map(book => {
                 if (book.id && book.title && book.authors && book.imageLinks) {
+                  console.log(book)
                   return (
                     <Book
                       key={book.id}
-                      id={book.id}
-                      title={book.title}
-                      author={book.authors}
-                      image={book.imageLinks.thumbnail}
+                      updateShelf={updateShelf}
+                      bookObject={book}
                     />
                   );
                 }
