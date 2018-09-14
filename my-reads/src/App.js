@@ -18,6 +18,7 @@ class BooksApp extends React.Component {
   }
 
   moveShelf = (book, shelf) => {
+    console.log(shelf)
     book.shelf = shelf;
     BooksAPI.update(book, shelf)
       .then(() => BooksAPI.getAll())
@@ -69,11 +70,12 @@ class BooksApp extends React.Component {
 
         <Route
           path="/search"
-          render={() => {
+          render={({history}) => {
             return (
               <div className="app">
-                <Search updateShelf={this.moveShelf} />
+                <Search updateShelf={(book, shelf)=>{this.moveShelf(book, shelf); history.push("/")}} />
               </div>
+
             );
           }}
         />
