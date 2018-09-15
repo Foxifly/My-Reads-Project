@@ -1,18 +1,17 @@
 import React from "react";
 import * as BooksAPI from "./BooksAPI";
 import "./App.css";
-import MenuBar from "./components/MenuBar";
-import BookShelf from "./components/BookShelf";
+import MyReadsMain from "./components/MyReadsMain";
 import { Route } from "react-router-dom";
-import { Link } from "react-router-dom";
 import Search from "./components/Search";
 
 class BooksApp extends React.Component {
   state = {
-    allBooks: []
+    allBooks: null
   };
   componentDidMount() {
     BooksAPI.getAll().then(books => {
+      console.log(books);
       this.setState({ allBooks: books });
     });
   }
@@ -32,39 +31,17 @@ class BooksApp extends React.Component {
           path="/"
           render={() => {
             return (
-              <div className="app">
-                <MenuBar />
-
-                <BookShelf
-                  bookStatus="Currently Reading"
-                  shelf="currentlyReading"
-                  updateShelf={this.moveShelf}
-                  booksList={this.state.allBooks.filter(book => {
-                    return book.shelf === "currentlyReading";
-                  })}
-                />
-
-                <BookShelf
-                  bookStatus="Want to Read"
-                  shelf="wantToRead"
-                  updateShelf={this.moveShelf}
-                  booksList={this.state.allBooks.filter(book => {
-                    return book.shelf === "wantToRead";
-                  })}
-                />
-
-                <BookShelf
-                  bookStatus="Read"
-                  shelf="read"
-                  updateShelf={this.moveShelf}
-                  booksList={this.state.allBooks.filter(book => {
-                    return book.shelf === "read";
-                  })}
-                />
-
-                <div className="open-search">
-                  <Link to="/search">Add a book</Link>
-                </div>
+              <div>
+                {this.state.allBooks && (
+                  <div>
+                    {
+                      <MyReadsMain
+                        updateShelf={this.moveShelf}
+                        allBooks={this.state.allBooks}
+                      />
+                    }
+                  </div>
+                )}
               </div>
             );
           }}
@@ -72,12 +49,16 @@ class BooksApp extends React.Component {
 
         <Route
           path="/search"
-          render={({history}) => {
+          render={({ history }) => {
             return (
               <div className="app">
-                <Search updateShelf={(book, shelf)=>{this.moveShelf(book, shelf); history.push("/")}} />
+                <Search
+                  updateShelf={(book, shelf) => {
+                    this.moveShelf(book, shelf);
+                    history.push("/");
+                  }}
+                />
               </div>
-
             );
           }}
         />
