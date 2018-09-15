@@ -59,7 +59,7 @@ class Book extends Component {
             </div>
           </div>
           <div className="book-title">{bookObject.title}</div>
-          <div className="book-authors">{bookObject.authors}</div>
+          <div className="book-authors">{bookObject.authors.join(', ')}</div>
         </div>
       </li>
     );

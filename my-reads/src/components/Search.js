@@ -57,7 +57,7 @@ class Search extends Component {
 
         <div className="search-books-results">
           <ol className="books-grid">
-        {  console.log(typeof results)}
+
             {typeof results === "string" && <h2>{this.state.results}</h2>}
             {typeof results === "object" &&
               results.map(book => {
@@ -74,6 +74,16 @@ class Search extends Component {
 
                 } else if (!book.authors) {
                   book.authors = ["Unknown"];
+                  return (
+                    <Book
+                      key={book.id}
+                      shelf="none"
+                      updateShelf={updateShelf}
+                      bookObject={book}
+                    />
+                  );
+                } else if (!book.title) {
+                  book.title = "Unknown";
                   return (
                     <Book
                       key={book.id}
