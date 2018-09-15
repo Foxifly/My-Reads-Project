@@ -12,25 +12,24 @@ class Search extends Component {
 
   //The state of the search component will have the results.
   state = {
-    results: []
+    results: "Type to Search"
   };
 
   //When something is typed into the search bar, handleChange will get results. If none are found, the function will return no results found.
   handleChange = query => {
     if (query) {
-
       BooksAPI.search(query).then(results => {
         if (results) {
           if (results.error === "empty query") {
-            this.setState({ results: "No Results Found" });
-          } else if (query === "") {
-            this.setState({ results: "Type to search" });
+            this.setState({ results: "No Results Found!" });
           }
           else {
             this.setState({ results });
           }
         }
       });
+    } else {
+      this.setState({results: "Type to Search"})
     }
 
   };
@@ -58,8 +57,9 @@ class Search extends Component {
 
         <div className="search-books-results">
           <ol className="books-grid">
-            {results === "No Results Found" && <h1>No results found!</h1>}
-            {results !== "No Results Found" &&
+        {  console.log(typeof results)}
+            {typeof results === "string" && <h2>{this.state.results}</h2>}
+            {typeof results === "object" &&
               results.map(book => {
                 if (book.id && book.title && book.authors && book.imageLinks) {
 
