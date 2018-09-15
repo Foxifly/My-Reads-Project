@@ -2,30 +2,44 @@ import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import * as BooksAPI from "../BooksAPI";
 import Book from "./Book";
+import PropTypes from "prop-types";
 
 class Search extends Component {
+  //Settings the PropTypes for the search component.
+  static propTypes = {
+    updateShelf: PropTypes.func.isRequired
+  };
+
+  //The state of the search component will have the results.
   state = {
     results: []
   };
 
+  //When something is typed into the search bar, handleChange will get results. If none are found, the function will return no results found.
   handleChange = query => {
     if (query) {
-      query = query.trim();
+
       BooksAPI.search(query).then(results => {
         if (results) {
           if (results.error === "empty query") {
             this.setState({ results: "No Results Found" });
-          } else {
+          } else if (query === "") {
+            this.setState({ results: "Type to search" });
+          }
+          else {
             this.setState({ results });
           }
         }
       });
     }
+
   };
 
+  //The render method of the search component. Will create a book component for each result.
   render() {
     const { results } = this.state;
     const { updateShelf } = this.props;
+
     return (
       <div className="search-books">
         <div className="search-books-bar">
@@ -48,14 +62,16 @@ class Search extends Component {
             {results !== "No Results Found" &&
               results.map(book => {
                 if (book.id && book.title && book.authors && book.imageLinks) {
-                  console.log(book)
+
                   return (
                     <Book
                       key={book.id}
+                      shelf="none"
                       updateShelf={updateShelf}
                       bookObject={book}
                     />
                   );
+
                 }
                 return true;
               })}
@@ -67,15 +83,3 @@ class Search extends Component {
 }
 
 export default Search;
-
-/*
-/*    sortedQuery.map((book) => {
-    return (
-      <Book
-        key={book.id}
-        id={book.id}
-        title={book.title}
-        author={book.authors}
-        image={book.imageLinks.thumbnail}
-      />
-    );*/

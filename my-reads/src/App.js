@@ -18,7 +18,6 @@ class BooksApp extends React.Component {
   }
 
   moveShelf = (book, shelf) => {
-    console.log(shelf)
     book.shelf = shelf;
     BooksAPI.update(book, shelf)
       .then(() => BooksAPI.getAll())
@@ -38,6 +37,7 @@ class BooksApp extends React.Component {
 
                 <BookShelf
                   bookStatus="Currently Reading"
+                  shelf="currentlyReading"
                   updateShelf={this.moveShelf}
                   booksList={this.state.allBooks.filter(book => {
                     return book.shelf === "currentlyReading";
@@ -46,6 +46,7 @@ class BooksApp extends React.Component {
 
                 <BookShelf
                   bookStatus="Want to Read"
+                  shelf="wantToRead"
                   updateShelf={this.moveShelf}
                   booksList={this.state.allBooks.filter(book => {
                     return book.shelf === "wantToRead";
@@ -54,6 +55,7 @@ class BooksApp extends React.Component {
 
                 <BookShelf
                   bookStatus="Read"
+                  shelf="read"
                   updateShelf={this.moveShelf}
                   booksList={this.state.allBooks.filter(book => {
                     return book.shelf === "read";

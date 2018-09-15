@@ -1,23 +1,48 @@
 import React, { Component } from "react";
+import PropTypes from "prop-types";
 
 class Book extends Component {
-state = {
-  shelf: ""
-}
-handleShelfChange = (book, shelf) => {
-  console.log(book, shelf)
-  this.updateShelf(book, shelf)
-}
+  static propTypes = {
+    shelf: PropTypes.string.isRequired,
+    bookObject: PropTypes.object.isRequired,
+    updateShelf: PropTypes.func.isRequired
+  };
+
+  state = {
+    value: this.props.shelf
+  };
+
+  handleChange = (book, shelf) => {
+    this.setState({ value: shelf });
+  };
+  
   render() {
-    const { updateShelf, bookObject} = this.props;
+    const { updateShelf, bookObject } = this.props;
     return (
       <li key={bookObject.id}>
-      <div className="book">
+        <div className="book">
           <div className="book-top">
-            <div className="book-cover" style={{ width: 128, height: 193, backgroundImage: `url(${bookObject.imageLinks.thumbnail})` }}></div>
+            <div
+              className="book-cover"
+              style={{
+                width: 128,
+                height: 193,
+                backgroundImage: `url(${bookObject.imageLinks.thumbnail})`
+              }}
+            />
             <div className="book-shelf-changer">
-              <select onChange={((event)=> {updateShelf(bookObject, event.target.value)})}>
-                <option value="move" disabled>Move to...</option>
+              <select
+                value={this.state.value}
+                onChange={event => {
+                  //passes back into App.js to move the book from one shelf to another
+                  updateShelf(bookObject, event.target.value);
+                  //Sets the state as the new value of where the book is at now
+                  this.handleChange(bookObject, event.target.value);
+                }}
+              >
+                <option value="move" disabled>
+                  Move to...
+                </option>
                 <option value="currentlyReading">Currently Reading</option>
                 <option value="wantToRead">Want to Read</option>
                 <option value="read">Read</option>
@@ -28,11 +53,9 @@ handleShelfChange = (book, shelf) => {
           <div className="book-title">{bookObject.title}</div>
           <div className="book-authors">{bookObject.authors}</div>
         </div>
-        </li>
-)
-  };
-
-
+      </li>
+    );
   }
+}
 
 export default Book;
