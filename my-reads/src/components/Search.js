@@ -61,7 +61,7 @@ class Search extends Component {
             {typeof results === "string" && <h2>{this.state.results}</h2>}
             {typeof results === "object" &&
               results.map(book => {
-                if (book.id && book.title && book.authors && book.imageLinks) {
+                if (book.id && book.title && book.authors) {
 
                   return (
                     <Book
@@ -72,6 +72,16 @@ class Search extends Component {
                     />
                   );
 
+                } else if (!book.authors) {
+                  book.authors = ["Unknown"];
+                  return (
+                    <Book
+                      key={book.id}
+                      shelf="none"
+                      updateShelf={updateShelf}
+                      bookObject={book}
+                    />
+                  );
                 }
                 return true;
               })}

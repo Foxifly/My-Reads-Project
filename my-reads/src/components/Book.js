@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
+import notAvailable from "../icons/img-not-available.png"
 
 class Book extends Component {
   static propTypes = {
@@ -15,9 +16,15 @@ class Book extends Component {
   handleChange = (book, shelf) => {
     this.setState({ value: shelf });
   };
-  
+
   render() {
     const { updateShelf, bookObject } = this.props;
+    let backgroundImg;
+    if (bookObject.imageLinks) {
+      backgroundImg = bookObject.imageLinks.thumbnail
+    } else {
+      backgroundImg = notAvailable
+    }
     return (
       <li key={bookObject.id}>
         <div className="book">
@@ -27,7 +34,8 @@ class Book extends Component {
               style={{
                 width: 128,
                 height: 193,
-                backgroundImage: `url(${bookObject.imageLinks.thumbnail})`
+                backgroundImage: `url(${backgroundImg})`
+
               }}
             />
             <div className="book-shelf-changer">
