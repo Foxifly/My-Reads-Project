@@ -7,10 +7,9 @@ class MyReadsMain extends Component {
   state = {
     allBooks: []
   }
-  
+
   componentDidMount = () => {
     this.setState({allBooks: this.props.allBooks});
-    this.forceUpdate();
   }
 
   render() {

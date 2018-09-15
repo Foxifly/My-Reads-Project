@@ -7,6 +7,7 @@ import PropTypes from "prop-types";
 class Search extends Component {
   //Settings the PropTypes for the search component.
   static propTypes = {
+    checkShelf: PropTypes.func.isRequired,
     updateShelf: PropTypes.func.isRequired
   };
 
@@ -37,7 +38,7 @@ class Search extends Component {
   //The render method of the search component. Will create a book component for each result.
   render() {
     const { results } = this.state;
-    const { updateShelf } = this.props;
+    const { updateShelf, checkShelf } = this.props;
 
     return (
       <div className="search-books">
@@ -61,29 +62,29 @@ class Search extends Component {
             {typeof results === "string" && <h2>{this.state.results}</h2>}
             {typeof results === "object" &&
               results.map(book => {
+                checkShelf(book);
+
+                let id;
                 if (book.id && book.title && book.authors) {
-
-                  return (
-                    <Book
-                      key={book.id}
-                      shelf="none"
-                      updateShelf={updateShelf}
-                      bookObject={book}
-                    />
-                  );
-
-                } else if (!book.authors) {
+                  id = book.id;
+                }
+                else if (!book.authors) {
                   book.authors = ["Unknown"];
+                  id = book.id;
+                } else if (!book.title) {
+                    book.title = "Unknown";
+                    id = book.id;
+                }
+                if (book.shelf) {
                   return (
                     <Book
-                      key={book.id}
-                      shelf="none"
+                      key={id}
+                      shelf={book.shelf}
                       updateShelf={updateShelf}
                       bookObject={book}
                     />
                   );
-                } else if (!book.title) {
-                  book.title = "Unknown";
+                } else {
                   return (
                     <Book
                       key={book.id}

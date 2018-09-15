@@ -10,12 +10,18 @@ class Book extends Component {
   };
 
   state = {
-    value: this.props.shelf
+    value: "",
+    shelf: ""
   };
 
   handleChange = (book, shelf) => {
-    this.setState({ value: shelf });
+    this.setState({ value: shelf});
   };
+
+  componentDidMount = () => {
+    this.setState({value: this.props.shelf});
+  }
+
 
   render() {
     const { updateShelf, bookObject } = this.props;
@@ -35,9 +41,9 @@ class Book extends Component {
                 width: 128,
                 height: 193,
                 backgroundImage: `url(${backgroundImg})`
-
               }}
             />
+
             <div className="book-shelf-changer">
               <select
                 value={this.state.value}
@@ -59,7 +65,9 @@ class Book extends Component {
             </div>
           </div>
           <div className="book-title">{bookObject.title}</div>
-          <div className="book-authors">{bookObject.authors.join(', ')}</div>
+          {console.log(bookObject.authors)}
+          <div className="book-authors">{!bookObject.authors ? bookObject.authors = ["Unknown"] : bookObject.authors.join(', ') }</div>
+
         </div>
       </li>
     );

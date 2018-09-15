@@ -11,7 +11,6 @@ class BooksApp extends React.Component {
   };
   componentDidMount() {
     BooksAPI.getAll().then(books => {
-      console.log(books);
       this.setState({ allBooks: books });
     });
   }
@@ -23,7 +22,20 @@ class BooksApp extends React.Component {
       .then(books => this.setState({ allBooks: books }));
   };
 
+  checkInShelf = (checkBook) => {
+    this.state.allBooks.forEach((book) => {
+      if (checkBook.id === book.id) {
+        checkBook.shelf = book.shelf;
+        console.log(checkBook.shelf)
+      } else {
+        return false;
+      }
+    });
+
+  }
+
   render() {
+    const self = this;
     return (
       <div>
         <Route
@@ -53,9 +65,12 @@ class BooksApp extends React.Component {
             return (
               <div className="app">
                 <Search
+                  checkShelf={this.checkInShelf}
                   updateShelf={(book, shelf) => {
                     this.moveShelf(book, shelf);
+
                     history.push("/");
+                    self.forceUpdate();
                   }}
                 />
               </div>
