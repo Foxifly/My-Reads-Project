@@ -6,7 +6,7 @@
 MyReads is a book tracking app that allows users to sort and search for books that they are currently reading, want to read, and read. In this app, users can view books in their shelves and move them to different shelves. Additionally, if a user no longer wants a book in their shelf, they can remove it by selecting "none". To add new books, the user will select the search button in the bottom right corner to search for a new book. The possible search terms can be found [here](https://github.com/udacity/reactnd-project-myreads-starter/blob/master/SEARCH_TERMS.md) This app was built using the React JavaScript Framework and was modified for Udacity's Project 6.
 
 ## Installation
-To get the app running, clone or download this repository. Once it's finished, `cd` into the directory, and `npm install`. This will install all of the dependencies.
+To get the app running, clone or download this repository. Once it's finished, `cd` into the directory, and `npm install`. This will install all of the dependencies. Once these are installed, use `npm start` to start the app.
 
 ## Components
 - **MyReadsMain:** The main page that renders on "/". This page will display 3 bookshelf components with their respective books.

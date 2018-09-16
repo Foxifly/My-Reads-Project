@@ -30,7 +30,7 @@ class Search extends Component {
         }
       });
     } else {
-      this.setState({results: "Type to Search"})
+      this.setState({results: "Type to Search"});
     }
 
   };
@@ -94,7 +94,6 @@ class Search extends Component {
                     />
                   );
                 }
-                return true;
               })}
           </ol>
         </div>

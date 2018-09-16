@@ -16,7 +16,6 @@ class BooksApp extends React.Component {
   }
 
   moveShelf = (bookName, shelf) => {
-    let isFound;
     bookName.shelf = shelf;
 
     BooksAPI.update(bookName, shelf);
@@ -34,7 +33,6 @@ class BooksApp extends React.Component {
     this.state.allBooks.forEach(book => {
       if (checkBook.id === book.id) {
         checkBook.shelf = book.shelf;
-        console.log(checkBook.shelf);
       } else {
         return false;
       }

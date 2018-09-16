@@ -19,7 +19,7 @@ class Book extends Component {
 
   //Anytime a selection is made handleChange is called to set the shelf state.
   handleChange = (book, shelf) => {
-    this.setState({ value: shelf})
+    this.setState({ value: shelf});
   };
 
   //When the Book Component moutes, set the shelf state (value) to the shelf props.
@@ -33,9 +33,9 @@ class Book extends Component {
     const { updateShelf, bookObject } = this.props;
     let backgroundImg;
     if (bookObject.imageLinks) {
-      backgroundImg = bookObject.imageLinks.thumbnail
+      backgroundImg = bookObject.imageLinks.thumbnail;
     } else {
-      backgroundImg = notAvailable
+      backgroundImg = notAvailable;
     }
     return (
       <li key={bookObject.id}>
@@ -71,7 +71,6 @@ class Book extends Component {
             </div>
           </div>
           <div className="book-title">{bookObject.title}</div>
-          {console.log(bookObject.authors)}
           <div className="book-authors">{!bookObject.authors ? bookObject.authors = ["Unknown"] : bookObject.authors.join(', ') }</div>
 
         </div>
