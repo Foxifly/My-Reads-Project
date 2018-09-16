@@ -18,7 +18,7 @@ class BooksApp extends React.Component {
   moveShelf = (bookName, shelf) => {
     let isFound;
     bookName.shelf = shelf;
-    
+
     BooksAPI.update(bookName, shelf);
     if (this.state.allBooks.indexOf(bookName.id) !== -1) {
       this.setState({ book: bookName });
@@ -74,8 +74,6 @@ class BooksApp extends React.Component {
                   checkShelf={this.checkInShelf}
                   updateShelf={(book, shelf) => {
                     this.moveShelf(book, shelf);
-                  }}
-                  pushHistory={() => {
                     history.push("/");
                   }}
                 />

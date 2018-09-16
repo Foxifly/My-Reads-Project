@@ -7,7 +7,6 @@ class Book extends Component {
     shelf: PropTypes.string.isRequired,
     bookObject: PropTypes.object.isRequired,
     updateShelf: PropTypes.func.isRequired,
-    pushHistory: PropTypes.func.isRequired
   };
 
   state = {
@@ -16,10 +15,7 @@ class Book extends Component {
   };
 
   handleChange = (book, shelf) => {
-    this.setState({ value: shelf}, () => {
-        this.props.pushHistory();
-        this.forceUpdate();
-    })
+    this.setState({ value: shelf})
 
 
   };
