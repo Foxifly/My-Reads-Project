@@ -6,7 +6,8 @@ class Book extends Component {
   static propTypes = {
     shelf: PropTypes.string.isRequired,
     bookObject: PropTypes.object.isRequired,
-    updateShelf: PropTypes.func.isRequired
+    updateShelf: PropTypes.func.isRequired,
+    pushHistory: PropTypes.func.isRequired
   };
 
   state = {
@@ -15,11 +16,17 @@ class Book extends Component {
   };
 
   handleChange = (book, shelf) => {
-    this.setState({ value: shelf});
+    this.setState({ value: shelf}, () => {
+        this.props.pushHistory();
+        this.forceUpdate();
+    })
+
+
   };
 
   componentDidMount = () => {
     this.setState({value: this.props.shelf});
+
   }
 
 

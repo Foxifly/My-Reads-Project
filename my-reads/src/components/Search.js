@@ -38,7 +38,7 @@ class Search extends Component {
   //The render method of the search component. Will create a book component for each result.
   render() {
     const { results } = this.state;
-    const { updateShelf, checkShelf } = this.props;
+    const { updateShelf, checkShelf, pushHistory} = this.props;
 
     return (
       <div className="search-books">
@@ -81,6 +81,7 @@ class Search extends Component {
                       key={id}
                       shelf={book.shelf}
                       updateShelf={updateShelf}
+                      pushHistory={pushHistory}
                       bookObject={book}
                     />
                   );
@@ -89,6 +90,7 @@ class Search extends Component {
                     <Book
                       key={book.id}
                       shelf="none"
+                      pushHistory={pushHistory}
                       updateShelf={updateShelf}
                       bookObject={book}
                     />

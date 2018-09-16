@@ -15,27 +15,33 @@ class BooksApp extends React.Component {
     });
   }
 
-  moveShelf = (book, shelf) => {
-    book.shelf = shelf;
-    BooksAPI.update(book, shelf)
-      .then(() => BooksAPI.getAll())
-      .then(books => this.setState({ allBooks: books }));
+  moveShelf = (bookName, shelf) => {
+    let isFound;
+    bookName.shelf = shelf;
+    
+    BooksAPI.update(bookName, shelf);
+    if (this.state.allBooks.indexOf(bookName.id) !== -1) {
+      this.setState({ book: bookName });
+    } else {
+      this.setState(newState => ({
+        allBooks: newState.allBooks.concat([bookName])
+      }));
+    }
+    BooksAPI.getAll().then(books => this.setState({ allBooks: books }));
   };
 
-  checkInShelf = (checkBook) => {
-    this.state.allBooks.forEach((book) => {
+  checkInShelf = checkBook => {
+    this.state.allBooks.forEach(book => {
       if (checkBook.id === book.id) {
         checkBook.shelf = book.shelf;
-        console.log(checkBook.shelf)
+        console.log(checkBook.shelf);
       } else {
         return false;
       }
     });
-
-  }
+  };
 
   render() {
-    const self = this;
     return (
       <div>
         <Route
@@ -68,9 +74,9 @@ class BooksApp extends React.Component {
                   checkShelf={this.checkInShelf}
                   updateShelf={(book, shelf) => {
                     this.moveShelf(book, shelf);
-
+                  }}
+                  pushHistory={() => {
                     history.push("/");
-                    self.forceUpdate();
                   }}
                 />
               </div>
