@@ -9,11 +9,11 @@ MyReads is a book tracking app that allows users to sort and search for books th
 To get the app running, clone or download this repository. Once it's finished, `cd` into the directory, and `npm install`. This will install all of the dependencies.
 
 ## Components
-- MyReadsMain: The main page that renders on "/". This page will display 3 bookshelf components with their respective books.
-- MenuBar: The green menu bar that displays on the top of the MyReadsMain component.
-- BookShelf: Three shelves; "currently reading", "want to read", "read". Renders the book component for each book
-- Search: The search component that displays on the "/search" route. Allows user to search for new books.
-- Book: The book component displays the book title, author, and thumbnail for a given book in the allBooks state.
+- **MyReadsMain:** The main page that renders on "/". This page will display 3 bookshelf components with their respective books.
+- **MenuBar:** The green menu bar that displays on the top of the MyReadsMain component.
+- **BookShelf:** Three shelves; "currently reading", "want to read", "read". Renders the book component for each book
+- **Search:** The search component that displays on the "/search" route. Allows user to search for new books.
+- **Book:** The book component displays the book title, author, and thumbnail for a given book in the allBooks state.
 
 ## Dependencies
 - [Create React App](https://github.com/facebook/create-react-app#readme)
