@@ -3,29 +3,32 @@ import PropTypes from "prop-types";
 import notAvailable from "../icons/img-not-available.png"
 
 class Book extends Component {
+
+  //declaring the required proptypes of the Book Component
   static propTypes = {
     shelf: PropTypes.string.isRequired,
     bookObject: PropTypes.object.isRequired,
     updateShelf: PropTypes.func.isRequired,
   };
 
+  //The book state
   state = {
     value: "",
     shelf: ""
   };
 
+  //Anytime a selection is made handleChange is called to set the shelf state.
   handleChange = (book, shelf) => {
     this.setState({ value: shelf})
-
-
   };
 
+  //When the Book Component moutes, set the shelf state (value) to the shelf props.
   componentDidMount = () => {
     this.setState({value: this.props.shelf});
 
   }
 
-
+  //The render function of the book component which renders a book with the title, author, and thumnail information.
   render() {
     const { updateShelf, bookObject } = this.props;
     let backgroundImg;
